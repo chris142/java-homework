@@ -1,16 +1,12 @@
 public class GCD {
 
-    public static void log(int s) {
-        System.out.println(s);
-    }
-
-    public static int rem(int a, int b) {
-        int ans = Math.abs(a) - Math.abs(Math.floorDiv(a, b)) * b;
-        log(ans);
-        return ans;
+    private static int rem(int a, int b) {
+        return a - Math.floorDiv(a, b) * b;
     }
 
     public static int gcdFirst(int a, int b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
         int tmp;
         while (b != 0) {
             tmp = a % b;
@@ -21,6 +17,8 @@ public class GCD {
     }
 
     public static int gcdSecond(int a, int b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
         int tmp;
         while (b != 0) {
             tmp = Math.floorMod(a, b);
@@ -31,6 +29,8 @@ public class GCD {
     }
 
     public static int gcdThird(int a, int b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
         int tmp;
         while (b != 0) {
             tmp = rem(a, b);
