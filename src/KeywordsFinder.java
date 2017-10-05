@@ -4,8 +4,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 class MyFileFindVisitor extends SimpleFileVisitor<Path> {
 
-    private String keyWordFirst = "transient";
-    private String keyWordSecond = "volatile";
+    private static final String KEY_WORD_FIRST = "transient";
+    private static final String KEY_WORD_SECOND = "volatile";
 
     public FileVisitResult visitFile(Path path, BasicFileAttributes fileAttributes) {
 
@@ -15,11 +15,11 @@ class MyFileFindVisitor extends SimpleFileVisitor<Path> {
                 String content = new String(Files.readAllBytes(path));
 
                 boolean containsFirst = false;
-                if (keyWordFirst != null && content.contains(keyWordFirst))
+                if (KEY_WORD_FIRST != null && content.contains(KEY_WORD_FIRST))
                     containsFirst = true;
 
                 boolean containsSecond = false;
-                if (keyWordSecond != null && content.contains(keyWordSecond))
+                if (KEY_WORD_SECOND != null && content.contains(KEY_WORD_SECOND))
                     containsSecond = true;
 
                 if (containsFirst && containsSecond)
