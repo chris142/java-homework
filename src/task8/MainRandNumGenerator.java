@@ -1,3 +1,4 @@
+package task8;
 
 import java.util.stream.Stream;
 

@@ -1,3 +1,5 @@
+package task4;
+
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

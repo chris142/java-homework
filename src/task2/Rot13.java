@@ -1,3 +1,5 @@
+package task2;
+
 public class Rot13 {
 
     public static char rotIt(char c) {

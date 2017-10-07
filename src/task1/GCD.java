@@ -1,3 +1,5 @@
+package task1;
+
 public class GCD {
 
     private static int rem(int a, int b) {

@@ -1,3 +1,4 @@
+package task8;
 
 class LCG {
 
