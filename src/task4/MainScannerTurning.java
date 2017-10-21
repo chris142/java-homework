@@ -1,66 +1,71 @@
 package task4;
 
-import java.util.Locale;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.function.DoubleSupplier;
-import java.util.function.IntSupplier;
-import java.util.function.Supplier;
+import java.util.*;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class MainScannerTurning {
 
     //stream and line method
-    public static Stream<String> getStreamOfWords(Scanner scanner) {
+    public static Stream getStreamOfWords(Scanner scanner) {
+        Spliterator<String> split = Spliterators.spliterator(scanner, Long.MAX_VALUE, Spliterator.NONNULL | Spliterator.ORDERED);
+        return StreamSupport.stream(split, false);
 
-        return Stream.generate(new Supplier<String>() {
-            @Override
-            public String get() {
-                return scanner.next();
-            }
-        });
     }
 
     //int method
     public static IntStream getStreamOfInt(Scanner scanner) {
+        Spliterator.OfInt split = Spliterators.spliterator(new PrimitiveIterator.OfInt() {
 
-        return IntStream.generate(new IntSupplier() {
             @Override
-            public int getAsInt() {
+            public boolean hasNext() {
+                return scanner.hasNextInt();
+            }
+
+            @Override
+            public int nextInt() {
                 return scanner.nextInt();
             }
-        });
+        }, Long.MAX_VALUE, Spliterator.NONNULL | Spliterator.ORDERED);
+        return StreamSupport.intStream(split, false);
+
     }
 
+    //double method
     public static DoubleStream getStreamOfDouble(Scanner scanner) {
+        Spliterator.OfDouble split = Spliterators.spliterator(new PrimitiveIterator.OfDouble() {
 
-        return DoubleStream.generate(new DoubleSupplier() {
             @Override
-            public double getAsDouble() {
+            public boolean hasNext() {
+                return scanner.hasNextDouble();
+            }
+
+            @Override
+            public double nextDouble() {
                 return scanner.nextDouble();
             }
-        });
+        }, Long.MAX_VALUE, Spliterator.NONNULL | Spliterator.ORDERED);
+        return StreamSupport.doubleStream(split, false);
+
     }
 
     public static void main(String[] args) {
         MainScannerTurning main = new MainScannerTurning();
-//        String s = "asdasdd s 56 3 777 adsadssd";         //words
+        String s = "asdasdd s 56 3 777 adsadssd";         //words
 //        String s = " 56 3 777  ";                         //int
-        String s = "56.335 0.2 3.2  ";                    //double
+//        String s = "56.335 0.2 3.2  ";                    //double
 //        String s = "asdasdd /n s 56/n 3 777/n adsadssd";  //lines
 
         //use "/n" for lines instead of " "
         try (Scanner scanner = new Scanner(s).useDelimiter(" ").useLocale(new Locale("US"));) {
 
-//            Stream stream = getStreamOfWords(scanner);
-//            IntStream stream = getStreamOfInt(scanner);
-            DoubleStream stream = getStreamOfDouble(scanner);
+            Stream stream = getStreamOfWords(scanner);
+//         IntStream stream = getStreamOfInt(scanner);
+//            DoubleStream stream = getStreamOfDouble(scanner);
 
-            stream.forEach(i -> System.out.println(i));
-        } catch (NoSuchElementException e) {
-            System.out.println("Input exceeded");
+            stream.forEach(System.out::println);
         }
     }
 }
