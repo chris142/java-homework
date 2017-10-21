@@ -53,16 +53,16 @@ public class MainScannerTurning {
 
     public static void main(String[] args) {
         MainScannerTurning main = new MainScannerTurning();
-        String s = "asdasdd s 56 3 777 adsadssd";         //words
-//        String s = " 56 3 777  ";                         //int
+//        String s = "asdasdd s 56 3 777 adsadssd";         //words
+        String s = " 56 3 777  ";                         //int
 //        String s = "56.335 0.2 3.2  ";                    //double
 //        String s = "asdasdd /n s 56/n 3 777/n adsadssd";  //lines
 
         //use "/n" for lines instead of " "
         try (Scanner scanner = new Scanner(s).useDelimiter(" ").useLocale(new Locale("US"));) {
 
-            Stream stream = getStreamOfWords(scanner);
-//         IntStream stream = getStreamOfInt(scanner);
+//            Stream stream = getStreamOfWords(scanner);
+         IntStream stream = getStreamOfInt(scanner);
 //            DoubleStream stream = getStreamOfDouble(scanner);
 
             stream.forEach(System.out::println);
