@@ -1,44 +1,54 @@
 package task1;
 
-public class GCD {
+class GCD {
+
 
     private static int rem(int a, int b) {
-        return a - Math.floorDiv(a, b) * b;
-    }
 
-    public static int gcdFirst(int a, int b) {
-        a = Math.abs(a);
-        b = Math.abs(b);
-        int tmp;
-        while (b != 0) {
-            tmp = a % b;
-            a = b;
-            b = tmp;
+        if (b < 0) {
+            return rem(a, -b);
+        }
+        if (a < 0) {
+            return rem(-a, b);
+        }
+        while (a >= b) {
+            a = a - b;
         }
         return a;
     }
 
-    public static int gcdSecond(int a, int b) {
-        a = Math.abs(a);
-        b = Math.abs(b);
-        int tmp;
-        while (b != 0) {
-            tmp = Math.floorMod(a, b);
-            a = b;
-            b = tmp;
+    static int gcdFirst(int a, int b) {
+
+        while (a != 0 && b != 0) {
+            if (Math.abs(a) > Math.abs(b)) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
         }
-        return a;
+        return a | b;
     }
 
-    public static int gcdThird(int a, int b) {
-        a = Math.abs(a);
-        b = Math.abs(b);
-        int tmp;
-        while (b != 0) {
-            tmp = rem(a, b);
-            a = b;
-            b = tmp;
+    static int gcdSecond(int a, int b) {
+
+        while (a != 0 && b != 0) {
+            if (Math.abs(a) > Math.abs(b)) {
+                a = Math.floorMod(a, b);
+            } else {
+                b = Math.floorMod(b, a);
+            }
         }
-        return a;
+        return a | b;
+    }
+
+    static int gcdThird(int a, int b) {
+        while (a != 0 && b != 0) {
+            if (Math.abs(a) > Math.abs(b)) {
+                a = rem(a, b);
+            } else {
+                b = rem(b, a);
+            }
+        }
+        return a | b;
     }
 }
