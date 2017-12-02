@@ -2,7 +2,6 @@ package task1;
 
 class GCD {
 
-
     private static int rem(int a, int b) {
 
         if (b < 0) {
